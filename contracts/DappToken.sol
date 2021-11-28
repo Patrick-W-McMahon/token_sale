@@ -1,52 +1,61 @@
-// SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.9.0;
-
-
-contract SafeMath {
-    function safeAdd(uint a, uint b) public pure returns (uint c) {
-        c = a + b;
-        require(c >= a);
-    }
-
-    function safeSub(uint a, uint b) public pure returns (uint c) {
-        require(b <= a);
-        c = a - b;
-    }
-
-    function safeMul(uint a, uint b) public pure returns (uint c) {
-        c = a * b;
-        require(a == 0 || c / a == b);
-    }
-
-    function safeDiv(uint a, uint b) public pure returns (uint c) {
-        require(b > 0);
-        c = a / b;
-    }
-}
-
-/**
-ERC Token Standard #20 Interface
-https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
-*/
-contract ERC20Interface {
-    function totalSupply() public constant returns (uint);
-    function balanceOf(address tokenOwner) public constant returns (uint balance);
-    function allowance(address tokenOwner, address spender) public constant returns (uint remaining);
-    function transfer(address to, uint tokens) public returns (bool success);
-    function approve(address spender, uint tokens) public returns (bool success);
-    function transferFrom(address from, address to, uint tokens) public returns (bool success);
-
-    event Transfer(address indexed from, address indexed to, uint tokens);
-    event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
-}
+pragma solidity ^0.4.2;
 
 contract DappToken {
-    // Contructor
-    // Set the total number of tokens
-    // read the total number of tokens
+    string  public name = "DApp Token";
+    string  public symbol = "DAPP";
+    string  public standard = "DApp Token v1.0";
     uint256 public totalSupply;
 
-    constructor() public {
-        totalSupply = 1000000;
+    event Transfer(
+        address indexed _from,
+        address indexed _to,
+        uint256 _value
+    );
+
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint256 _value
+    );
+
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    function DappToken (uint256 _initialSupply) public {
+        balanceOf[msg.sender] = _initialSupply;
+        totalSupply = _initialSupply;
+    }
+
+    function transfer(address _to, uint256 _value) public returns (bool success) {
+        require(balanceOf[msg.sender] >= _value);
+
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+
+        Transfer(msg.sender, _to, _value);
+
+        return true;
+    }
+
+    function approve(address _spender, uint256 _value) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+
+        Approval(msg.sender, _spender, _value);
+
+        return true;
+    }
+
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+        require(_value <= balanceOf[_from]);
+        require(_value <= allowance[_from][msg.sender]);
+
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+
+        allowance[_from][msg.sender] -= _value;
+
+        Transfer(_from, _to, _value);
+
+        return true;
     }
 }
