@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 const Footer = () => (
     <Container>
-        <p>Footer</p>
+        <div>Footer</div>
     </Container>
 );
 

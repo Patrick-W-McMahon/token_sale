@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import Layout from "../components/layout";
-import { Form, InputGroup, FormControl, Button, ProgressBar } from "react-bootstrap";
+import { Form, InputGroup, FormControl, Button, ProgressBar, Container } from "react-bootstrap";
 import Wallet from "../components/wallet";
+import { EtherToWei } from "../libs/blockchain";
 
 const tokenData = {
-  tokenPrice: 1000000000000000,
+  tokenPrice: 0.05, //price in Eth
   tokensSupply: 750000,
   tokenBalance: 10,
   tokensSold: 10,
@@ -12,13 +13,13 @@ const tokenData = {
 
 export default function Home() {
   return (
-    <Wallet tokenPrice={tokenData.tokenPrice} tokenSupply={tokenData.tokensSupply}>
+    <Wallet tokenPrice={EtherToWei(tokenData.tokenPrice)} tokenSupply={tokenData.tokensSupply}>
       <Layout>
         <Fragment>
-          <h1 className={'text-center'}>DAPP TOKEN ICO SALE</h1>
-          <hr />
-          <br />
-          <div className={'text-center'}>
+          <div className={'page-header-block'}>
+            <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>
+          </div>
+          <Container className={'text-center'}>
             <p>
               Introducing "DApp Token" (DAPP)!
               Token price is {tokenData.tokenPrice} Ether. currently have {tokenData.tokenBalance} DAPP.
@@ -33,9 +34,9 @@ export default function Home() {
             ) : (
               <div>You need to login with your wallet.</div>
             )}
-          </div>     
-          <ProgressBar animated striped now={20} />
-          <p className={'text-center'}>{tokenData.tokensSold} / {tokenData.tokensSupply} tokens sold</p>
+            <ProgressBar animated striped now={20} />
+            <p className={'text-center'}>{tokenData.tokensSold} / {tokenData.tokensSupply} tokens sold</p>
+          </Container>     
         </Fragment>
       </Layout>
     </Wallet>

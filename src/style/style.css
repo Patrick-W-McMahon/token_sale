@@ -1,0 +1,50 @@
+:root {
+    --clr-primary-hex: #0069d9;
+    --clr-primary-rgb: 0, 105, 217;
+}
+
+
+/*
+* Base Style
+*
+*/
+
+html,
+body {
+    width: 100%;
+}
+
+.main_wrapper {
+    width: 100%;
+    padding: 0;
+}
+
+.content_wrapper {
+    min-height: 100vh;
+}
+
+.page-header-block {
+    width: 100%;
+    display: block;
+    color: white;
+    background: rgba(var(--clr-primary-rgb), 0.6);
+    padding: 40px 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input-group * {
+    border-radius: 8px;
+}
+
+.input-group input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0;
+}
+
+.input-group button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+}
