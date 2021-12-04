@@ -15,8 +15,7 @@ export default function Home() {
   return (
     <Wallet tokenPrice={EtherToWei(tokenData.tokenPrice)} tokenSupply={tokenData.tokensSupply}>
       <Layout>
-        {({ isLoggedIn }) => {
-          return (
+        
           <Fragment>
             <div className={'page-header-block'}>
               <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>
@@ -40,7 +39,7 @@ export default function Home() {
               <p className={'text-center'}>{tokenData.tokensSold} / {tokenData.tokensSupply} tokens sold</p>
             </Container>     
           </Fragment>
-        )}}
+
       </Layout>
     </Wallet>
   );
