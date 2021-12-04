@@ -7,10 +7,10 @@ const Header = ({ loginFn, loggedIn, accounts }) => (
             <Navbar.Brand href="#home">DAPP</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+                <Nav className="me-auto me-auto mb-2 mb-lg-0">
                     <Nav.Link href="#home">Home</Nav.Link>
                 </Nav>
-                <Nav className="justify-content-end">
+                <Nav className="justify-content-end d-flex">
                     {loggedIn ? <Navbar.Text>Account: {accounts[0]}</Navbar.Text> : <Button variant={'outline-primary'} onClick={() => loginFn()}>Login</Button> }
                 </Nav>
             </Navbar.Collapse>
