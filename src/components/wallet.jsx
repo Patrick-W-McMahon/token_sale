@@ -91,7 +91,8 @@ class Wallet extends Component {
             const accounts = await web3.request({ method: 'eth_requestAccounts' });
             this.setState({ accounts: [...accounts] });
         } catch {
-            throw "login canceled";
+            console.log('login canceled');
+            //throw "login canceled";
         }
         
     }
