@@ -68,20 +68,16 @@ class Wallet extends Component {
     renderChildren = () => {
         const { children } = this.props;
         const { accounts } = this.state;
-        const handleLogin = () => this.login();
-        const childrenWithProps = React.Children.map(children, (child, index) => {
-            if(typeof child == 'object') {
-                return React.cloneElement(child, {
-                    key: index,
-                    loginFn: () => handleLogin(),
-                    isLoggedIn: accounts[0] !== '0x0',
-                    accounts,
-                });
-            } else {
-                return child;
-            }   
-        });
-        return childrenWithProps;
+        const additionalProps = {
+            loginFn: () => this.login(),
+            isLoggedIn: accounts[0] !== '0x0',
+            accounts
+        };
+        if (React.isValidElement(children)) {
+            return React.Children.map(children, (child, i) => React.cloneElement(child, { key: i, ...additionalProps }));
+          } else {
+            return typeof children === 'function' ? children(additionalProps) : children;
+          }
     }
 
     isLoggedIn = () => {
@@ -91,8 +87,13 @@ class Wallet extends Component {
 
     login = async () => {
         const { web3 } = this.state;
-        const accounts = await web3.request({ method: 'eth_requestAccounts' });
-        this.setState({ accounts: [...accounts] });
+        try {
+            const accounts = await web3.request({ method: 'eth_requestAccounts' });
+            this.setState({ accounts: [...accounts] });
+        } catch {
+            throw "login canceled";
+        }
+        
     }
 
     logout = async () => {

@@ -7,3 +7,7 @@ This project is an updated reconstruction of the [dapp university token sale](ht
 # docs
 
 https://docs.metamask.io/guide/
+
+start ganache-cli with the command:
+
+ganache-cli

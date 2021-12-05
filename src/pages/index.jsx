@@ -14,10 +14,51 @@ const tokenData = {
 export default function Home() {
   return (
     <Wallet tokenPrice={EtherToWei(tokenData.tokenPrice)} tokenSupply={tokenData.tokensSupply}>
-      <Layout>
-        
-          <Fragment>
-            <div className={'page-header-block'}>
+      {(walletProps) => {
+        const { isLoggedIn, accounts, loginFn } = walletProps;
+        console.log('wallet', isLoggedIn, accounts);
+        return (
+          <Layout loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts}>
+            <Fragment>
+              <div className={'page-header-block'}>
+                <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>
+              </div>
+              <Container className={'text-center'}>
+                <p>
+                  Introducing "DApp Token" (DAPP)!
+                  Token price is {tokenData.tokenPrice} Ether. currently have {tokenData.tokenBalance} DAPP.
+                </p>
+                {console.log('test', isLoggedIn)}
+                {isLoggedIn ? (
+                  <Form>
+                    <InputGroup size={'lg'} className={'mb-3'}>
+                      <FormControl placeholder={'Tokens'} aria-label={'Tokens'} aria-describedby={'Tokens'} />
+                      <Button variant="primary" id="buy-token-btn">Buy Tokens</Button>
+                    </InputGroup>
+                  </Form>
+                ) : (
+                  <div>You need to login with your wallet.</div>
+                )}
+                <ProgressBar animated striped now={20} />
+                <p className={'text-center'}>{tokenData.tokensSold} / {tokenData.tokensSupply} tokens sold</p>
+              </Container>  
+            </Fragment>
+          </Layout>
+        );
+      }}
+    </Wallet>
+  );
+}
+
+
+/*
+
+<Layout loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts}>
+            
+               
+          </Layout>
+
+<div className={'page-header-block'}>
               <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>
             </div>
             <Container className={'text-center'}>
@@ -25,7 +66,7 @@ export default function Home() {
                 Introducing "DApp Token" (DAPP)!
                 Token price is {tokenData.tokenPrice} Ether. currently have {tokenData.tokenBalance} DAPP.
               </p>
-              {true ? (
+              {isLoggedIn ? (
                 <Form>
                   <InputGroup size={'lg'} className={'mb-3'}>
                     <FormControl placeholder={'Tokens'} aria-label={'Tokens'} aria-describedby={'Tokens'} />
@@ -37,10 +78,6 @@ export default function Home() {
               )}
               <ProgressBar animated striped now={20} />
               <p className={'text-center'}>{tokenData.tokensSold} / {tokenData.tokensSupply} tokens sold</p>
-            </Container>     
-          </Fragment>
+            </Container>  
 
-      </Layout>
-    </Wallet>
-  );
-}
+*/

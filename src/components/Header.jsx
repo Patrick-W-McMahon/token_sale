@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
-const Header = ({ loginFn, loggedIn, accounts }) => (
+const Header = ({ loginFn, isLoggedIn, accounts }) => (
     <Navbar bg="light" expand="lg">
         <Container>
             <Navbar.Brand href="#home">DAPP</Navbar.Brand>
@@ -11,7 +11,7 @@ const Header = ({ loginFn, loggedIn, accounts }) => (
                     <Nav.Link href="#home">Home</Nav.Link>
                 </Nav>
                 <Nav className="justify-content-end d-flex">
-                    {loggedIn ? <Navbar.Text>Account: {accounts[0]}</Navbar.Text> : <Button variant={'outline-primary'} onClick={() => loginFn()}>Login</Button> }
+                    {isLoggedIn ? <Navbar.Text>Account: {accounts[0]}</Navbar.Text> : <Button variant={'outline-primary'} onClick={() => loginFn()}>Login</Button> }
                 </Nav>
             </Navbar.Collapse>
         </Container>
