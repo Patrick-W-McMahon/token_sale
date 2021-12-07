@@ -7,13 +7,13 @@ import '../style/bootstrap.min.css';
 import '../style/fontawesome-free-5.15.4-web/css/all.min.css';
 import '../style/style.css';
 
-const Layout = ({ children, loginFn, isLoggedIn, accounts }) => (
+const Layout = ({ children, loginFn, isLoggedIn, accounts, title, author }) => (
     <Container className={'main_wrapper'} fluid>
         <div className={'content_wrapper'}>
-            <Header loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts} />
+            <Header title={title} loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts} />
             {children}
         </div>
-        <Footer />
+        <Footer author={author} />
     </Container>
 );
 

@@ -1,9 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const Footer = () => (
+const Footer = ({ author }) => (
     <Container>
-        <div>Footer</div>
+        <div>
+        <p>Created by {author} &#169; 2021</p>
+        </div>
     </Container>
 );
 

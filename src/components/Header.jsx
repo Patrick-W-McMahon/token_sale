@@ -1,10 +1,10 @@
 import React from "react";
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
-const Header = ({ loginFn, isLoggedIn, accounts }) => (
+const Header = ({ loginFn, isLoggedIn, accounts, title }) => (
     <Navbar bg="light" expand="lg">
         <Container>
-            <Navbar.Brand href="#home">DAPP</Navbar.Brand>
+            <Navbar.Brand href="#home">{title}</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto me-auto mb-2 mb-lg-0">
