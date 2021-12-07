@@ -28,7 +28,7 @@ class Wallet extends Component {
         // handle account changes & logout
         web3.on("accountsChanged", accounts => {
             if(accounts.length === 0) {
-                this.setState({ accounts: ['0x0'] });
+                this.logout();
             }
         });
         
