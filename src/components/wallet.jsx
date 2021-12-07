@@ -24,6 +24,13 @@ class Wallet extends Component {
             console.log('no wallet found');
         }
         this.setState({ web3 });
+
+        // handle account changes & logout
+        web3.on("accountsChanged", accounts => {
+            if(accounts.length === 0) {
+                this.setState({ accounts: ['0x0'] });
+            }
+        });
         
 
         //try {
