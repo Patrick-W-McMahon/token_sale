@@ -11,7 +11,7 @@ const Header = ({ loginFn, isLoggedIn, accounts, title }) => (
                     <Nav.Link href="#home">Home</Nav.Link>
                 </Nav>
                 <Nav className="justify-content-end d-flex">
-                    {isLoggedIn ? <Navbar.Text>Account: {accounts[0]}</Navbar.Text> : <Button variant={'outline-primary'} onClick={() => loginFn()}>Login</Button> }
+                    {isLoggedIn ? <Navbar.Text>Account: {accounts[0]}</Navbar.Text> : <Button variant={'outline-primary'} onClick={() => loginFn()}>Connect to a Wallet</Button> }
                 </Nav>
             </Navbar.Collapse>
         </Container>

@@ -44,9 +44,9 @@ export default function Home() {
                   Introducing "DApp Token" (DAPP)!
                   Token price is {tokenData.tokenPrice} Ether. currently have {tokenData.tokenBalance} DAPP.
                 </p>
-                {isLoggedIn ? <IcoForm /> : <div>You need to login with your wallet.</div>}
+                {isLoggedIn ? <IcoForm /> : <div>You need to connect a wallet to interact with the ICO sale.</div>}
                 <ProgressBar animated striped now={20} />
-                <p className={'text-center'}>{tokenData.tokensSold} / {tokenData.tokensSupply} tokens sold</p>
+                <p className={'text-center'}>{tokenData.tokensSold} / {site.tokenSupply} tokens sold</p>
               </Container>  
             </Fragment>
           </Layout>
