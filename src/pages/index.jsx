@@ -12,7 +12,6 @@ const tokenData = {
 };
 
 export default function Home() {
-
   const pageData = useStaticQuery(graphql`
     query {
       site {
@@ -27,14 +26,13 @@ export default function Home() {
       }
     }   
   `);
-  const { site } = pageData;
-  const { title, author, tokenPrice, tokenSupply, icoStart, icoEnd } = site;
+  const { title, author, tokenPrice, tokenSupply, icoStart, icoEnd } = pageData.site.siteMetadata;
   return (
     <Wallet tokenPrice={EtherToWei(tokenPrice)} tokenSupply={tokenSupply} icoStart={icoStart} icoEnd={icoEnd}>
       {(walletProps) => {
-        const { isLoggedIn, accounts, loginFn } = walletProps;
+        const { isLoggedIn, accounts, loginFn, network } = walletProps;
         return (
-          <Layout title={title} author={author} loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts}>
+          <Layout loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts} title={title} author={author} network={network}>
             <Fragment>
               <div className={'page-header-block'}>
                 <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>
@@ -46,7 +44,7 @@ export default function Home() {
                 </p>
                 {isLoggedIn ? <IcoForm /> : <div>You need to connect a wallet to interact with the ICO sale.</div>}
                 <ProgressBar animated striped now={20} />
-                <p className={'text-center'}>{tokenData.tokensSold} / {site.tokenSupply} tokens sold</p>
+                <p className={'text-center'}>{tokenData.tokensSold} / {tokenSupply} tokens sold</p>
               </Container>  
             </Fragment>
           </Layout>

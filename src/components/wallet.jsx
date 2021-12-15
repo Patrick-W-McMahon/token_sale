@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import detectEthereumProvider from '@metamask/detect-provider';
 //import { unlockAccount } from '../libs/getWeb3';
 //import getWeb3 from "../libs/getWeb3";
 
@@ -10,7 +11,12 @@ class Wallet extends Component {
             web3Provider: null,
             contracts: [],
             tokensSold: 0,
-            web3: null
+            web3: null,
+            network: {
+                chainId: null,
+                isMetaMask: false,
+                selectedAddress: null
+            }
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -19,9 +25,20 @@ class Wallet extends Component {
     }
     componentDidMount = async () => {
         const { ethereum: web3 } = window;
+        const provider = await detectEthereumProvider();
+        console.log('provider',web3.givenProvider);
+        if(web3.givenProvider.selectedAddress) {
+            this.login();
+        }
+        if(provider) {
+            this.setState({ web3Provider: provider });
+        } else {
+            console.log('no wallet found');
+        }
 
         if(typeof web3 === 'undefined') {
             console.log('no wallet found');
+            return;
         }
         this.setState({ web3 });
 
@@ -74,11 +91,12 @@ class Wallet extends Component {
 
     renderChildren = () => {
         const { children } = this.props;
-        const { accounts } = this.state;
+        const { accounts, network } = this.state;
         const additionalProps = {
             loginFn: () => this.login(),
             isLoggedIn: accounts[0] !== '0x0',
-            accounts
+            accounts,
+            network
         };
         if (React.isValidElement(children)) {
             return React.Children.map(children, (child, i) => React.cloneElement(child, { key: i, ...additionalProps }));
@@ -92,16 +110,36 @@ class Wallet extends Component {
         return accounts[0] !== '0x0';
     }
 
-    login = async () => {
+    login = async (address) => {
         const { web3 } = this.state;
         try {
             const accounts = await web3.request({ method: 'eth_requestAccounts' });
-            this.setState({ accounts: [...accounts] });
-        } catch {
-            console.log('login canceled');
+            const { chainId, isMetaMask, selectedAddress } = await web3;
+            const network = await web3.request({method: 'eth_ChainId'});
+            console.log(web3, network);
+            this.setState({ accounts: [...accounts], network: { chainId, isMetaMask, selectedAddress } });
+        } catch (err){
+            console.log('login canceled',err);
             //throw "login canceled";
-        }
-        
+        } 
+    }
+
+    addToken = async () => {
+        /*
+        const { web3 } = this.state;
+        const wasAdded = await web3.request({
+            method: 'wallet_watchAsset',
+            params: {
+              type: 'ERC20', // Initially only supports ERC20, but eventually more!
+              options: {
+                address: tokenAddress, // The address that the token is at.
+                symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+                decimals: tokenDecimals, // The number of decimals in the token
+                image: tokenImage, // A string url of the token logo
+              },
+            },
+        });
+        */
     }
 
     logout = async () => {
