@@ -9,8 +9,14 @@
 *
 */
 
+html {
+    height: 100vh;
+}
+
 html,
 body {
+    padding: 0;
+    margin: 0;
     width: 100%;
 }
 
@@ -20,7 +26,15 @@ body {
 }
 
 .content_wrapper {
-    min-height: 100vh;
+    min-height: 98vh;
+}
+
+.content_wrapper:nth-child(1) {
+    margin-top: 55px;
+}
+
+.navbar {
+    border-bottom: 1px solid rgba(var(--clr-primary-rgb), 0.6);
 }
 
 .page-header-block {
@@ -47,4 +61,9 @@ body {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left-width: 0;
+}
+
+.footer-container {
+    background: rgba(var(--clr-primary-rgb), 0.6);
+    color: white;
 }
