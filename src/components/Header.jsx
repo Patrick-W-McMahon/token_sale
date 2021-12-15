@@ -1,21 +1,36 @@
-import React from "react";
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import React, { Fragment } from "react";
+import { Navbar, Container, Nav, Button, NavDropdown } from 'react-bootstrap';
+import { addressShortDisplay } from '../libs/blockchain';
 
-const Header = ({ loginFn, isLoggedIn, accounts, title }) => (
-    <Navbar bg="light" expand="lg">
-        <Container>
-            <Navbar.Brand href="#home">{title}</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto me-auto mb-2 mb-lg-0">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                </Nav>
-                <Nav className="justify-content-end d-flex">
-                    {isLoggedIn ? <Navbar.Text>Account: {accounts[0]}</Navbar.Text> : <Button variant={'outline-primary'} onClick={() => loginFn()}>Connect to a Wallet</Button> }
-                </Nav>
-            </Navbar.Collapse>
-        </Container>
-    </Navbar>
-);
+const Header = ({ loginFn, isLoggedIn, accounts, title, network }) => {
+    return (
+        <Navbar fixed="top" bg="light" expand="lg">
+            <Container>
+                <Navbar.Brand href="#home">{title}</Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Collapse className="d-flex">
+                    <Nav className="p-2">
+                        <Nav.Link href="#home">Home</Nav.Link>
+                    </Nav>
+                    <Nav className="ml-auto p-2">
+                        {isLoggedIn ? (
+                            <Fragment>
+                                <Navbar.Text>{network.chainId || ''}</Navbar.Text>
+                                <NavDropdown title={`Account: ${addressShortDisplay(accounts[0])}`} id="navbarScrollingDropdown">
+                                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="#action5">Logout</NavDropdown.Item>
+                                </NavDropdown>
+                            </Fragment>
+                        ) : ( 
+                        <Button variant={'outline-primary'} onClick={() => loginFn()}>Connect Wallet</Button> 
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+    );
+}
 
 export default Header;
