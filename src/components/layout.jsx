@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 
 import '../style/bootstrap.min.css';
 import '../style/fontawesome-free-5.15.4-web/css/all.min.css';
