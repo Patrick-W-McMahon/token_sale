@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import detectEthereumProvider from '@metamask/detect-provider';
+import { getNetworkData } from '../libs/blockchain';
 //import { unlockAccount } from '../libs/getWeb3';
 //import getWeb3 from "../libs/getWeb3";
 
@@ -22,16 +23,22 @@ class Wallet extends Component {
         this.logout = this.logout.bind(this);
         this.renderChildren = this.renderChildren.bind(this);
         this.isLoggedIn = this.isLoggedIn.bind(this);
+        this.handleChainChanged = this.handleChainChanged.bind(this);
     }
     componentDidMount = async () => {
         const { ethereum: web3 } = window;
+        //const { Handler, Target} = web3;
         const provider = await detectEthereumProvider();
-        console.log('provider',web3.givenProvider);
-        if(web3.givenProvider.selectedAddress) {
-            this.login();
-        }
+        console.log('provider', provider);
+        //if(web3 && web3.givenProvider && web3.givenProvider.selectedAddress) {
+        //    this.login();
+        //}
         if(provider) {
-            this.setState({ web3Provider: provider });
+            const { network } = this.state;
+            const chainId = await web3.request({ method: 'eth_chainId' });
+            web3.on('chainChanged', this.handleChainChanged);
+            const netData = getNetworkData(chainId);
+            this.setState({ web3Provider: provider, network: { ...network, chainId, ...netData } });
         } else {
             console.log('no wallet found');
         }
@@ -89,6 +96,13 @@ class Wallet extends Component {
         */
     }
 
+    handleChainChanged = async (_chainId) => {
+        const { network, web3 } = this.state;
+        const chainId = await web3.request({ method: 'eth_chainId' });
+        const netData = getNetworkData(chainId);
+        this.setState({ network: { ...network, chainId, ...netData } });
+    }
+
     renderChildren = () => {
         const { children } = this.props;
         const { accounts, network } = this.state;
@@ -115,9 +129,10 @@ class Wallet extends Component {
         try {
             const accounts = await web3.request({ method: 'eth_requestAccounts' });
             const { chainId, isMetaMask, selectedAddress } = await web3;
-            const network = await web3.request({method: 'eth_ChainId'});
-            console.log(web3, network);
-            this.setState({ accounts: [...accounts], network: { chainId, isMetaMask, selectedAddress } });
+            const network = await web3.request({method: 'eth_chainId'});
+            const netData = getNetworkData(chainId);
+            console.log('login test', web3, network);
+            this.setState({ accounts: [...accounts], network: { chainId, isMetaMask, selectedAddress, ...netData } });
         } catch (err){
             console.log('login canceled',err);
             //throw "login canceled";

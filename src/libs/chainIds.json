@@ -1,0 +1,110 @@
+{
+    "0x1": {
+        "name": "Mainnet",
+        "longName": "Ethereum Mainnet",
+        "currency": "ETH",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x2": {
+        "name":"Expanse Net",
+        "longName": "Expanse Network",
+        "currency": "EXP",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x3": {
+        "name": "Testnet",
+        "longName":"Ropsten Test Network",
+        "currency": "ROP",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x4": {
+        "name": "Testnet",
+        "longName":"Rinkeby Test Network",
+        "currency": "RIN",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x5": {
+        "name": "Testnet",
+        "longName":"Goerli Test Network",
+        "currency": "GOR",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x2a": {
+        "name": "Testnet",
+        "longName":"Kovan Test Network",
+        "currency": "KOV",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x56": {
+        "name": "Smart Chain",
+        "longName": "Binance Smart Chain",
+        "currency": "BNB",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x59": {
+        "name": "EOS Mainnet",
+        "longName": "EOS Mainnet",
+        "currency": "EOS",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x61": {
+        "name": "Ethereum Classic",
+        "longName": "Ethereum Classic Network",
+        "currency": "ETC",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x62": {
+        "name": "Ethereum Classic TestNet",
+        "longName": "Ethereum Classic Test Network",
+        "currency": "TETC",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x63": {
+        "name": "Ethereum Classic TestNet",
+        "longName": "Ethereum Classic Test Network",
+        "currency": "METC",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    },
+    "0x97": {
+        "name": "Binance Smart Chain Testnet",
+        "longName": "Binance Smart Chain Test Network",
+        "currency": "tBNB",
+        "color": {
+            "bg": "primary",
+            "text": "light"
+        }
+    }
+}
