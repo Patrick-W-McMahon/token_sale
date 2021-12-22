@@ -12,6 +12,8 @@ npm install -g gatsby
 npm install -g gatsby-cli
 npm install -g webpack
 npm install -g react-refresh-webpack-plugin
+npm install -g truffle
+npm install -g ganache-cli
 
 ```
 

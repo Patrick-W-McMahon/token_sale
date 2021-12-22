@@ -1,5 +1,5 @@
 {
-    "name": "gatsby-starter-hello-world",
+    "name": "token_sale",
     "private": true,
     "description": "A simplified bare-bones starter for Gatsby",
     "version": "0.1.0",
@@ -33,9 +33,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+        "url": "https://github.com/Patrick-W-McMahon/token_sale"
     },
     "bugs": {
-        "url": "https://github.com/gatsbyjs/gatsby/issues"
+        "url": "https://github.com/Patrick-W-McMahon/token_sale/issues"
     }
 }
