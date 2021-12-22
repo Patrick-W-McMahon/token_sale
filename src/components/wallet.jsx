@@ -108,6 +108,7 @@ class Wallet extends Component {
         const { accounts, network } = this.state;
         const additionalProps = {
             loginFn: () => this.login(),
+            logoutFn: () => this.logout(),
             isLoggedIn: accounts[0] !== '0x0',
             accounts,
             network

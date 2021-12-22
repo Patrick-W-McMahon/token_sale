@@ -30,9 +30,9 @@ export default function Home() {
   return (
     <Wallet tokenPrice={EtherToWei(tokenPrice)} tokenSupply={tokenSupply} icoStart={icoStart} icoEnd={icoEnd}>
       {(walletProps) => {
-        const { isLoggedIn, accounts, loginFn, network } = walletProps;
+        const { isLoggedIn, accounts, loginFn, logoutFn, network } = walletProps;
         return (
-          <Layout loginFn={loginFn} isLoggedIn={isLoggedIn} accounts={accounts} title={title} author={author} network={network}>
+          <Layout loginFn={loginFn} logoutFn={logoutFn} isLoggedIn={isLoggedIn} accounts={accounts} title={title} author={author} network={network}>
             <Fragment>
               <div className={'page-header-block'}>
                 <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>

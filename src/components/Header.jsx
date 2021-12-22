@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Navbar, Container, Nav, Button, NavDropdown, Badge } from 'react-bootstrap';
 import { addressShortDisplay } from '../libs/blockchain';
 
-const Header = ({ loginFn, isLoggedIn, accounts, title, network }) => {
+const Header = ({ loginFn, logoutFn, isLoggedIn, accounts, title, network }) => {
     console.log('head', network);
     return (
         <Navbar fixed="top" bg="light" expand="lg">
@@ -25,7 +25,7 @@ const Header = ({ loginFn, isLoggedIn, accounts, title, network }) => {
                                     <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                                     <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action5">Logout</NavDropdown.Item>
+                                    <NavDropdown.Item href="#" onClick={() => logoutFn()}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                             </Fragment>
                         ) : ( 
