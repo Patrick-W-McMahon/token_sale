@@ -16,7 +16,8 @@ class Wallet extends Component {
             network: {
                 chainId: null,
                 isMetaMask: false,
-                selectedAddress: null
+                selectedAddress: null,
+                networkVersion: 1
             }
         }
         this.login = this.login.bind(this);
@@ -24,6 +25,7 @@ class Wallet extends Component {
         this.renderChildren = this.renderChildren.bind(this);
         this.isLoggedIn = this.isLoggedIn.bind(this);
         this.handleChainChanged = this.handleChainChanged.bind(this);
+        this.buyToken = this.buyToken.bind(this);
     }
     componentDidMount = async () => {
         const { ethereum: web3 } = window;
@@ -107,6 +109,7 @@ class Wallet extends Component {
         const { children } = this.props;
         const { accounts, network } = this.state;
         const additionalProps = {
+            buyTokenFn: props => this.buyToken(props),
             loginFn: () => this.login(),
             logoutFn: () => this.logout(),
             isLoggedIn: accounts[0] !== '0x0',
@@ -132,12 +135,24 @@ class Wallet extends Component {
             const { chainId, isMetaMask, selectedAddress } = await web3;
             const network = await web3.request({method: 'eth_chainId'});
             const netData = getNetworkData(chainId);
+            /*
+            web3.eth.getCoinbase((err, account) => {
+                if(err === null) {
+                    console.log('account',account);
+                    
+                  }
+            });
+            */
             console.log('login test', web3, network);
             this.setState({ accounts: [...accounts], network: { chainId, isMetaMask, selectedAddress, ...netData } });
         } catch (err){
             console.log('login canceled',err);
             //throw "login canceled";
         } 
+    }
+
+    buyToken = async (tokenCount) => {
+        console.log('buy token', tokenCount);
     }
 
     addToken = async () => {

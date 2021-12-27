@@ -35,3 +35,5 @@ ganache-cli
 https://chainlist.org/
 
 https://github.com/ethereum-lists/chains
+https://trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask.html
+https://www.npmjs.com/package/truffle

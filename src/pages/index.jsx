@@ -30,9 +30,9 @@ export default function Home() {
   return (
     <Wallet tokenPrice={EtherToWei(tokenPrice)} tokenSupply={tokenSupply} icoStart={icoStart} icoEnd={icoEnd}>
       {(walletProps) => {
-        const { isLoggedIn, accounts, loginFn, logoutFn, network } = walletProps;
+        const { buyTokenFn, isLoggedIn, accounts, loginFn, logoutFn, network } = walletProps;
         return (
-          <Layout loginFn={loginFn} logoutFn={logoutFn} isLoggedIn={isLoggedIn} accounts={accounts} title={title} author={author} network={network}>
+          <Layout buyTokenFn={buyTokenFn} loginFn={loginFn} logoutFn={logoutFn} isLoggedIn={isLoggedIn} accounts={accounts} title={title} author={author} network={network}>
             <Fragment>
               <div className={'page-header-block'}>
                 <h1 className={'text-center primary-header'}>DAPP TOKEN ICO SALE</h1>
@@ -42,7 +42,7 @@ export default function Home() {
                   Introducing "DApp Token" (DAPP)!
                   Token price is {tokenData.tokenPrice} Ether. currently have {tokenData.tokenBalance} DAPP.
                 </p>
-                {isLoggedIn ? <IcoForm /> : <div>You need to connect a wallet to interact with the ICO sale.</div>}
+                {isLoggedIn ? <IcoForm buyTokenFn={buyTokenFn} /> : <div>You need to connect a wallet to interact with the ICO sale.</div>}
                 <ProgressBar animated striped now={20} />
                 <p className={'text-center'}>{tokenData.tokensSold} / {tokenSupply} tokens sold</p>
               </Container>  
